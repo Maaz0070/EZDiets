@@ -6,10 +6,21 @@
     <h1>Result:</h1>
     <h2>Showing results for: {{ searchQuery }}</h2>
     <body>
+        <div id="result">
         <strong>List of All menu items</strong>
-        <p1>Response: </p1>>
+        <p1>Response: </p1>
         
-            {{Response.i}}
-
+            {{Response}}
+            {{Response_json}}
+        </div>
     </body>
+
+    <script type='text/javascript' src='declare.js'></script>
+    <script>
+
+        var json4real = JSON.parse(jsonobj.length)
+        document.write('length is: ', json4real.length)
+
+     </script>
+
 </html>

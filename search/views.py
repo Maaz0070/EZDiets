@@ -10,6 +10,7 @@ import json
 import http.client
 import pprint
 import requests
+import sys
 
 # Create your views here.
 
@@ -40,6 +41,13 @@ def results(request):
         response = requests.request("GET", url, headers=headers, params=querystring)
         response_dict = json.loads(response.text)
 
+        sys.stdout = open('declare.js', 'w')
+
+        jsonobj = json.dumps(response_dict)
+
+        #var jsonstr = [{x : y: }]
+        print("var jsonstr = '{}' ".format(jsonobj) )
+
 
         #print(response.text)
 
@@ -47,7 +55,8 @@ def results(request):
            # "data": data,
             "searchQuery": search,
            # "List": List,
-            "Response": response_dict
+            "Response": response_dict,
+            "Response_json": response
             #"Res": res
             #"items": #value from API
         })
