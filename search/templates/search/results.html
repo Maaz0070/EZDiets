@@ -2,6 +2,12 @@
 <html lang="en">
     <head>
         <title>Results Page</title>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>Page Title</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+        <script src='main.js'></script>
     </head>
     <h1>Result:</h1>
     <h2>Showing results for: {{ searchQuery }}</h2>
@@ -11,16 +17,23 @@
         <p1>Response: </p1>
         
             {{Response}}
-            {{Response_json}}
         </div>
+
+        <script type='text/javascript' src='declare.js'></script>
+        <script>
+            //Trying to display the API response in a table format
+            var json4real = JSON.parse(jsonstr);
+            
+            document.write('length is: ', json4real.length)
+    
+            for (i = 0; i < json4real.length; i++) {
+                document.write('<br>Item : ', json4real[i].title)
+                document.write('<br>Restaurant : ', json4real[i].restaurant)
+            }
+    
+         </script>
     </body>
 
-    <script type='text/javascript' src='declare.js'></script>
-    <script>
-
-        var json4real = JSON.parse(jsonobj.length)
-        document.write('length is: ', json4real.length)
-
-     </script>
+   
 
 </html>
