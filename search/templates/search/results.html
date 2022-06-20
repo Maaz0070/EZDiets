@@ -1,39 +1,144 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Results Page</title>
-        <meta charset='utf-8'>
-        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-        <title>Page Title</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-        <script src='main.js'></script>
-    </head>
-    <h1>Result:</h1>
-    <h2>Showing results for: {{ searchQuery }}</h2>
-    <body>
-        <div id="result">
-        <strong>List of All menu items</strong>
-        <p1>Response: </p1>
-        
-            {{Response}}
-        </div>
+<!DOCTYPE HTML> 
+<html> 
+ 
+<head>
+    <title>
+        How to convert JSON data to a
+        html table using JavaScript ?
+    </title>
 
-        <script type='text/javascript' src='declare.js'></script>
-        <script>
-            //Trying to display the API response in a table format
-            var json4real = JSON.parse(jsonstr);
-            
-            document.write('length is: ', json4real.length)
+    <h1>Results: </h1>
+     
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+</head>
+
+ 
+<body style = "text-align:center;" id = "body"> 
+     
     
-            for (i = 0; i < json4real.length; i++) {
-                document.write('<br>Item : ', json4real[i].title)
-                document.write('<br>Restaurant : ', json4real[i].restaurant)
+    <h3>Showing resuls for: {{searchQuery}}</h3>
+    <p>{{responseText}}</p>
+
+    <p id = "GFG_UP"  style =
+        "font-size: 15px; font-weight: bold;">
+    </p>
+
+    <button onclick = "createTable('#table')">
+        click here
+    </button>
+
+    <br><br>
+     
+    <table align = "center"
+            id="table" border="1">
+    </table>
+    
+     
+    <script>
+        var el_up = document.getElementById("GFG_UP");
+         
+
+        var list = [];
+        list = "{{responseText|escapejs}}";
+        //console.log(list);
+
+         var titles = []
+        for (var i = 0; i < list.length-8; i++) {
+            if(list[i] == 't' && list[i+1] == 'i')
+            {
+                var title = '';
+                for(var j = (i+8); list[j] != ","; j++) {
+                    title += list[j];
+                }
+                i = j;
+                console.log(title + ", ")
+                titles.push(title)
             }
+        }
+        console.log(titles)
+
+        var images = []
+        for (var i = 0; i < list.length-8; i++) {
+            if(list[i] == 'h' && list[i+1] == 't')
+            {
+                var image = '';
+                for(var j = (i); list[j] != ","; j++) {
+                    image += list[j];
+                }
+                i = j;
+                console.log(image + ", ");
+                var img = new Image();
+                img.src = image.slice(0, -1);
+                images.push(img);
+            }
+        }
+        console.log(images)
+
+        var restaurants = []
+        for (var i = 0; i < list.length-17; i++) {
+            if(list[i] == 'r' && list[i+1] == 'e' && list[i+2] == 's')
+            {
+                var restaurant = '';
+                for(var j = (i+17); list[j] != ","; j++) {
+                    restaurant += list[j];
+                }
+                i = j;
+                console.log(restaurant + ", ")
+                restaurants.push(restaurant)
+            }
+        }
+        console.log(restaurants)
+
+        var a = [titles, restaurants]
+        console.log(a)
+
+
+        function createTable(tableData) {
+            var table = document.createElement('table');
+            var tableBody = document.createElement('tbody');
+
+            tableData.forEach(function(rowData) {
+                var row = document.createElement('tr');
+                console.log(typeof(cellData))
+
+                if(typeof(cellData) == typeof(img)) {
+                    rowData.forEach(function(cellData) {
+                    var cell = document.createElement('td');
+                    cell.appendChild(document.createElement(cellData));
+                    row.appendChild(cell);
+                    });
+
+                    tableBody.appendChild(row);
+
+                }
+                else {
+                    rowData.forEach(function(cellData) {
+                var cell = document.createElement('td');
+                cell.appendChild(document.createTextNode(cellData));
+                row.appendChild(cell);
+                });
+
+                tableBody.appendChild(row);
+
+                }
+                
+            });
+
+            table.appendChild(tableBody);
+            document.body.appendChild(table);
+}
+
+
+createTable(a);
     
-         </script>
-    </body>
 
-   
 
+
+
+        
+    </script>
+</body> 
+ 
 </html>

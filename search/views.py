@@ -38,7 +38,8 @@ def results(request):
             'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
         }
 
-        response = requests.request("GET", url, headers=headers, params=querystring)
+        response = requests.request("GET", url, headers=headers, params=querystring) 
+        rect = response.text
         response_dict = json.loads(response.text)
 
         sys.stdout = open('declare.js', 'w')
@@ -54,8 +55,9 @@ def results(request):
         return render(request, "search/results.html", {
            # "data": data,
             "searchQuery": search,
+            "responseText": jsonobj,
            # "List": List,
-            "Response": response_dict,
+            "Responsei": response_dict,
             "Response_json": response
             #"Res": res
             #"items": #value from API
