@@ -21,19 +21,17 @@
     <h3>Showing resuls for: {{searchQuery}}</h3>
     <p>{{responseText}}</p>
 
-    <p id = "GFG_UP"  style =
-        "font-size: 15px; font-weight: bold;">
-    </p>
-
-    <button onclick = "createTable('#table')">
-        click here
-    </button>
+ 
 
     <br><br>
      
     <table align = "center"
             id="table" border="1">
     </table>
+
+    <div id="header"></div>
+
+    <img id="td" ></img>
     
      
     <script>
@@ -91,8 +89,6 @@
         }
         console.log(restaurants)
 
-        var a = [titles, restaurants]
-        console.log(a)
 
 
         function createTable(tableData) {
@@ -102,35 +98,27 @@
             tableData.forEach(function(rowData) {
                 var row = document.createElement('tr');
                 console.log(typeof(cellData))
-
-                if(typeof(cellData) == typeof(img)) {
                     rowData.forEach(function(cellData) {
                     var cell = document.createElement('td');
-                    cell.appendChild(document.createElement(cellData));
+                    cell.appendChild(document.createTextNode(cellData));
                     row.appendChild(cell);
-                    });
+                
+                
 
-                    tableBody.appendChild(row);
-
-                }
-                else {
-                    rowData.forEach(function(cellData) {
-                var cell = document.createElement('td');
-                cell.appendChild(document.createTextNode(cellData));
-                row.appendChild(cell);
                 });
 
                 tableBody.appendChild(row);
 
-                }
+                })
                 
-            });
-
-            table.appendChild(tableBody);
+                table.appendChild(tableBody);
             document.body.appendChild(table);
-}
+            };
 
+            
 
+var a = [titles, restaurants, images]
+console.log(a)
 createTable(a);
     
 
